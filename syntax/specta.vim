@@ -5,6 +5,7 @@ endif
 " let b:expecta_syntax = 'expecta'
 
 runtime! syntax/objc.vim
+runtime! syntax/cocoa.vim
 unlet b:current_syntax
 
 syn keyword specta expect to equal SpecBegin SpecEnd
