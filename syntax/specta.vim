@@ -10,8 +10,8 @@ unlet b:current_syntax
 syn keyword spectaBounds SpecBegin SpecEnd
 syn keyword specta describe it expect to equal
 
-hi def link specta Statement
-hi def link specaBounds PreProc
+hi def link spectaBounds PreProc
+hi def link specta       Statement
 
 let b:current_syntax = 'specta'
 
