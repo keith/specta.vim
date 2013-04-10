@@ -4,7 +4,10 @@ endif
 
 " let b:expecta_syntax = 'expecta'
 
-syn keyword specta expect to equal
+runtime! syntax/objc.vim
+unlet b:current_syntax
+
+syn keyword specta expect to equal SpecBegin SpecEnd
 
 hi def link specta Statement
 
