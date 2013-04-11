@@ -35,3 +35,10 @@ This changes the `filetype` to `specta` whenever a file named `*Test.m` is read 
 
 I also recommend you install [cocoa.vim](https://github.com/msanders/cocoa.vim/) which adds some Objective-C highlighting features (automatically used by specta.vim if installed).
 
+### Known issues
+
+- Right parens `)` at the end of `describe` blocks show up as errors
+- Highlighting inside other blocks doesn't work (this is because cocoa.vim messes with the block highlighting behavior)
+
+If you find any other issues or have any recommendations on how to solve these let me know via issues/pull requests
+
