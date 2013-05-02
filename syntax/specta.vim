@@ -21,7 +21,7 @@ syn keyword spectaKeywords ^AsyncBlock setAsyncSpecTimeout beforeAll beforeEach 
 syn keyword spectaPending pending xdescribe xcontext xexample xit xspecify
 
 syn keyword expectaComparisons expect to notTo will willNot
-syn keyword expectaMatchers equal beIdenticalTo beNil beTruthy beFalsy contain haveCountOf beEmpty beInstanceOf beKindOf beSubclassOf beLessThan beLessThanOrEqualTo beGreaterThan beGreaterThanOrEqualTo beInTheRangeOf beCloseTo beCloseToWithin raise raisyAny 
+syn keyword expectaMatchers equal beIdenticalTo beNil beTruthy beFalsy contain haveCountOf beEmpty beInstanceOf beKindOf beSubclassOf beLessThan beLessThanOrEqualTo beGreaterThan beGreaterThanOrEqualTo beInTheRangeOf beCloseTo beCloseToWithin raise raiseAny 
 
 
 hi def link spectaBounds       PreProc
