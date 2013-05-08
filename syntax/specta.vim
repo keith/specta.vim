@@ -17,7 +17,7 @@ endif
 syn keyword spectaBounds SpecBegin SpecEnd SharedExamplesBegin SharedExamplesEnd SPEC_BEGIN SPEC_END
 syn keyword spectaGroups describe context sharedExamplesFor
 syn keyword spectaFunctions it example specify itShouldBehaveLike itBehavesLike
-syn keyword spectaKeywords AsyncBlock setAsyncSpecTimeout beforeAll beforeEach before afterEach after afterAll
+syn keyword spectaKeywords AsyncBlock done setAsyncSpecTimeout beforeAll beforeEach before afterEach after afterAll
 syn keyword spectaPending pending xdescribe xcontext xexample xit xspecify
 
 syn keyword expectaComparisons expect to notTo will willNot
