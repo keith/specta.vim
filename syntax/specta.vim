@@ -14,11 +14,6 @@
 "   unlet b:current_syntax
 " endif
 
-" syn keyword spectaBounds SpecBegin SpecEnd SharedExamplesBegin SharedExamplesEnd SPEC_BEGIN SPEC_END
-" syn keyword spectaGroups describe context sharedExamplesFor
-" syn keyword spectaFunctions it example specify itShouldBehaveLike itBehavesLike
-" syn keyword spectaKeywords AsyncBlock done setAsyncSpecTimeout beforeAll beforeEach before afterEach after afterAll
-" syn keyword spectaPending pending xdescribe xcontext xexample xit xspecify
 
 " syn keyword expectaComparisons expect to notTo will willNot
 " syn keyword expectaMatchers equal beIdenticalTo beNil beTruthy beFalsy contain haveCountOf beEmpty beInstanceOf beKindOf beSubclassOf beLessThan beLessThanOrEqualTo beGreaterThan beGreaterThanOrEqualTo beInTheRangeOf beCloseTo beCloseToWithin raise raiseAny
@@ -38,11 +33,19 @@ runtime! syntax/objc.vim
 unlet! b:current_syntax
 set fdm=syntax
 
-" syntax match spectaKeywords "\vdescribe|beforeA" contained
-syntax keyword spectaKeywords context describe it afterAll beforeAll containedin=ALL,objcString
-syntax region spectaBlock start=/\vbeforeAll|afterAll\(\^\{/ end=/\v\}\);/ containedin=spectaSpec fold contains=ALL,spectaSpec
-syntax region spectaBlock start=/\vdescribe|context|it\(\@".*",\s\^\{/ end=/\v\}\);/ containedin=spectaSpec fold contains=ALL,spectaSpec
-syntax region spectaSpec matchgroup=spectaBounds start=/\vSpecBegin|SPEC_BEGIN/ end=/\vSpecEnd|SPEC_END/ containedin=ALL,spectaBlock fold contains=ALL,spectaKeywords
+syntax keyword spectaGroups context describe sharedExamplesFor containedin=ALL,objcString
+syntax keyword spectaKeywords after afterAll afterEach AsyncBlock before beforeAll beforeEach done example it itBehavesLike itShouldBehaveLike setAsyncSpecTimeout specify containedin=ALL,objcString
 
-highlight link spectaKeywords Function
-highlight link spectaBounds Structure
+" syntax keyword spectaPending pending xdescribe xcontext xexample xit xspecify nextgroup=spectaCommentBlock containedin=ALL,objcString
+" syntax region spectaCommentBlock matchgroup=spectaComment start=/\vx\w*\(\^\{/ end=/\v\}\);/ containedin=ALL
+
+syntax region spectaBlock start=/\v\(\^\{/ end=/\v\}\);/ containedin=ALL fold
+syntax region spectaBlock start=/\v\(\@".*",\s\^\{/ end=/\v\}\);/ containedin=ALL fold
+syntax region spectaSpec matchgroup=spectaBounds start=/\vSpecBegin|SPEC_BEGIN|SharedExamplesBegin/ end=/\vSpecEnd|SPEC_END|SharedExamplesEnd/ containedin=ALL,spectaBlock fold contains=ALL
+
+" highlight def link spectaComment Comment
+" highlight def link spectaPending Comment
+
+highlight def link spectaGroups PreProc
+highlight def link spectaKeywords Function
+highlight def link spectaBounds Structure
