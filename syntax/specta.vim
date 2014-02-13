@@ -16,7 +16,8 @@ runtime! syntax/cocoa_keywords.vim
 runtime! syntax/objc_enhanced.vim
 unlet! b:current_syntax
 
-syntax keyword spectaGroups after afterAll afterEach before beforeAll beforeEach context describe done example it itBehavesLike itShouldBehaveLike setAsyncSpecTimeout sharedExamplesFor specify nextgroup=spectaBlock containedin=ALLBUT,objcString
+syntax keyword spectaKeyword done setAsyncSpecTimeout containedin=ALLBUT,objcString,cCommentL
+syntax keyword spectaGroups after afterAll afterEach before beforeAll beforeEach context describe example it itBehavesLike itShouldBehaveLike sharedExamplesFor specify nextgroup=spectaBlock containedin=ALLBUT,objcString,cCommentL
 
 " Requires matchgroup=noop for correct start/end/folding
 "  this is caused by something in the imported objc.vim
@@ -26,11 +27,11 @@ syntax region spectaBlock matchgroup=noop start=/\v\(\@".*",\s\^(AsyncBlock)?\s*
 syntax region spectaSpec matchgroup=spectaBounds start=/\vSpecBegin|SPEC_BEGIN|SharedExamplesBegin/ end=/\vSpecEnd|SPEC_END|SharedExamplesEnd/ containedin=ALLBUT,spectaBlock fold contains=ALL
 
 " Pending specs, make the entire nested block a comment
-syntax keyword spectaPending pending xdescribe xcontext xexample xit xspecify nextgroup=spectaCommentBlock containedin=ALLBUT,objcString
+syntax keyword spectaPending pending xdescribe xcontext xexample xit xspecify nextgroup=spectaCommentBlock containedin=ALLBUT,objcString,cCommentL
 syntax region spectaCommentBlock matchgroup=spectaCommentBlock start=/\v\(\@".*",\s\^(AsyncBlock)?\s*\{/ end=/\v\}\);/ containedin=ALL fold contains=NONE
 
 " Focused specs, format the outside of the block
-syntax keyword spectaFocused fdescribe fcontext fexample fit fspecify nextgroup=spectaFocusedBlock containedin=ALLBUT,objcString
+syntax keyword spectaFocused fdescribe fcontext fexample fit fspecify nextgroup=spectaFocusedBlock containedin=ALLBUT,objcString,cCommentL
 syntax region spectaFocusedBlocks matchgroup=spectaFocusedBlock start=/\v\(\@".*",\s\^(AsyncBlock)?\s*\{/ end=/\v\}\);/ containedin=ALL fold contains=ALLBUT,spectaSpec
 
 highlight default link spectaPending Comment
@@ -39,6 +40,7 @@ highlight default link spectaCommentBlock Comment
 highlight default link spectaFocused TODO
 highlight default link spectaFocusedBlock TODO
 
+highlight default link spectaKeyword Function
 highlight default link spectaGroups Function
 highlight default link spectaBounds Structure
 
