@@ -30,18 +30,18 @@ runtime! syntax/objc.vim
 unlet! b:current_syntax
 set fdm=syntax
 
-syntax keyword spectaGroups after afterAll afterEach AsyncBlock before beforeAll beforeEach contained context describe done example it itBehavesLike itShouldBehaveLike setAsyncSpecTimeout sharedExamplesFor specify nextgroup=spectaBlock containedin=ALLBUT,objcString
+syntax keyword spectaGroups after afterAll afterEach before beforeAll beforeEach context describe done example it itBehavesLike itShouldBehaveLike setAsyncSpecTimeout sharedExamplesFor specify nextgroup=spectaBlock containedin=ALLBUT,objcString
 
 " Requires matchgroup=noop for correct start/end/folding
 "  this is caused by something in the imported objc.vim
 syntax region spectaBlock matchgroup=noop start=/\v\(\^\{/ end=/\v\}\);/ containedin=ALLBUT,spectaCommentBlock fold contains=ALLBUT,spectaSpec
-syntax region spectaBlock matchgroup=noop start=/\v\(\@".*",\s\^\{/ end=/\v\}\);/ containedin=ALLBUT,spectaCommentBlock fold contains=ALLBUT,spectaSpec
+syntax region spectaBlock matchgroup=noop start=/\v\(\@".*",\s\^(AsyncBlock)?\s*\{/ end=/\v\}\);/ containedin=ALLBUT,spectaCommentBlock fold contains=ALLBUT,spectaSpec
+
 syntax region spectaSpec matchgroup=spectaBounds start=/\vSpecBegin|SPEC_BEGIN|SharedExamplesBegin/ end=/\vSpecEnd|SPEC_END|SharedExamplesEnd/ containedin=ALLBUT,spectaBlock fold contains=ALL
 
 " highlight def link noop TODO
 
 syntax keyword spectaPending pending xdescribe xcontext xexample xit xspecify nextgroup=spectaCommentBlock containedin=ALLBUT,objcString
-syntax region spectaCommentBlock matchgroup=spectaCommentBlock start=/\v\(\^\{/ end=/\v\}\);/ containedin=ALL fold contains=NONE
 syntax region spectaCommentBlock matchgroup=spectaCommentBlock start=/\v\(\@".*",\s\^\{/ end=/\v\}\);/ containedin=ALL fold contains=NONE
 
 highlight def link spectaPending Comment
