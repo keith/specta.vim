@@ -20,32 +20,32 @@
 " hi def link spectaBounds       PreProc
 " hi def link spectaGroups       Function
 " hi def link spectaFunctions    Function
-" hi def link spectaKeywords     Statement
 " hi def link spectaPending      Comment
 " hi def link expectaComparisons Identifier
 " hi def link expectaMatchers    Type
 " let b:current_syntax = 'specta'
 " let c_no_curly_error = 1
-" syntax keyword spectaKeywords AsyncBlock done setAsyncSpecTimeout beforeAll beforeEach before afterEach after afterAll describe context sharedExamplesFor it contained
-" highlight def link spectaKeywords Function
 
 runtime! syntax/objc.vim
 unlet! b:current_syntax
 set fdm=syntax
 
-syntax keyword spectaGroups context describe sharedExamplesFor containedin=ALL,objcString
-syntax keyword spectaKeywords after afterAll afterEach AsyncBlock before beforeAll beforeEach done example it itBehavesLike itShouldBehaveLike setAsyncSpecTimeout specify containedin=ALL,objcString
+syntax keyword spectaGroups after afterAll afterEach AsyncBlock before beforeAll beforeEach contained context describe done example it itBehavesLike itShouldBehaveLike setAsyncSpecTimeout sharedExamplesFor specify nextgroup=spectaBlock containedin=ALLBUT,objcString
 
-" syntax keyword spectaPending pending xdescribe xcontext xexample xit xspecify nextgroup=spectaCommentBlock containedin=ALL,objcString
-" syntax region spectaCommentBlock matchgroup=spectaComment start=/\vx\w*\(\^\{/ end=/\v\}\);/ containedin=ALL
+" Requires matchgroup=noop for correct start/end/folding
+"  this is caused by something in the imported objc.vim
+syntax region spectaBlock matchgroup=noop start=/\v\(\^\{/ end=/\v\}\);/ containedin=ALLBUT,spectaCommentBlock fold contains=ALLBUT,spectaSpec
+syntax region spectaBlock matchgroup=noop start=/\v\(\@".*",\s\^\{/ end=/\v\}\);/ containedin=ALLBUT,spectaCommentBlock fold contains=ALLBUT,spectaSpec
+syntax region spectaSpec matchgroup=spectaBounds start=/\vSpecBegin|SPEC_BEGIN|SharedExamplesBegin/ end=/\vSpecEnd|SPEC_END|SharedExamplesEnd/ containedin=ALLBUT,spectaBlock fold contains=ALL
 
-syntax region spectaBlock start=/\v\(\^\{/ end=/\v\}\);/ containedin=ALL fold
-syntax region spectaBlock start=/\v\(\@".*",\s\^\{/ end=/\v\}\);/ containedin=ALL fold
-syntax region spectaSpec matchgroup=spectaBounds start=/\vSpecBegin|SPEC_BEGIN|SharedExamplesBegin/ end=/\vSpecEnd|SPEC_END|SharedExamplesEnd/ containedin=ALL,spectaBlock fold contains=ALL
+" highlight def link noop TODO
 
-" highlight def link spectaComment Comment
-" highlight def link spectaPending Comment
+syntax keyword spectaPending pending xdescribe xcontext xexample xit xspecify nextgroup=spectaCommentBlock containedin=ALLBUT,objcString
+syntax region spectaCommentBlock matchgroup=spectaCommentBlock start=/\v\(\^\{/ end=/\v\}\);/ containedin=ALL fold contains=NONE
+syntax region spectaCommentBlock matchgroup=spectaCommentBlock start=/\v\(\@".*",\s\^\{/ end=/\v\}\);/ containedin=ALL fold contains=NONE
 
-highlight def link spectaGroups PreProc
-highlight def link spectaKeywords Function
+highlight def link spectaPending Comment
+highlight def link spectaCommentBlock Comment
+
+highlight def link spectaGroups Function
 highlight def link spectaBounds Structure
