@@ -31,7 +31,7 @@ recommend you do this in your `.vimrc` detecting your typical test
 filename.
 
 ```
-autocmd BufReadPost,BufWrite *Test.m setlocal syntax=specta foldmethod=syntax
+autocmd BufNewFile,BufRead *Test.m setlocal syntax=specta foldmethod=syntax
 ```
 
 This changes the `syntax` to `specta` whenever a file named `*Test.m` is
@@ -40,7 +40,7 @@ files) You may also have to set the default `filetype` to Objective-C. I
 use something like:
 
 ```
-autocmd BufReadPost,BufNewFile *.h,*.m,*.pch setlocal filetype=objc
+autocmd BufNewFile,BufRead *.h,*.m,*.pch setlocal filetype=objc
 ```
 
 You can also install
