@@ -48,6 +48,9 @@ You can also install
 Objective-C highlighting features (automatically used by specta.vim if
 it's accessible).
 
+This plugin also provides mappings for
+[vim-endwise](https://github.com/tpope/vim-endwise).
+
 ### Known issues
 
 If you find any other issues or have any recommendations on how to solve

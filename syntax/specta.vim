@@ -1,7 +1,7 @@
 " Vim Syntax File
 " Language: Specta/Expecta flavored Objective-C
 " Maintainer: Keith Smiley <keithbsmiley@gmail.com>
-" Last Change: 2014 Feb 12
+" Last Change: 2014 May 1
 
 if exists('b:current_syntax')
   finish
@@ -50,6 +50,12 @@ if g:specta_highlight_expecta == 1
   highlight default link expectaComparisons Identifier
   highlight default link expectaMatchers    Type
 endif
+
+setlocal cinoptions+==SpecBegin,=SpecEnd
+let b:endwise_addition = '\=submatch(0) =~# "SpecBegin" ? "SpecEnd" : submatch(0) =~# "SPEC_BEGIN" ? "SPEC_END" : "SharedExamplesEnd"'
+let b:endwise_words = 'SpecBegin,SPEC_BEGIN,SharedExamplesBegin'
+let b:endwise_pattern = '^\s*\%(SpecBegin\|SPEC_BEGIN\|SharedExamplesBegin\)(\w\+)'
+let b:endwise_syngroups = 'spectaBounds'
 
 let c_no_curly_error = 1
 let b:current_syntax = 'specta'
